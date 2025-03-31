@@ -158,6 +158,7 @@ img {
 
 .promo-subheading {
     color: #461c00;
+    text-align: center;
 }
 
 .promo-text {
@@ -231,9 +232,14 @@ img {
     padding: 40px 100px;
 }
 
+.story-text {
+    text-align: center;
+}
+
 .story-image {
     border-radius: 1em;
     max-width: 800px;
+    width: 100%;
 }
 
 .btn-story {
@@ -279,6 +285,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 120px;
 }
 
 .testimonials-heading {
@@ -334,4 +341,154 @@ img {
 .credits {
     font-size: 10pt;
     padding-bottom: 20px;
+}
+
+.hamburger-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 60px;
+    padding: 10px;
+    z-index: 50;
+}
+
+.hamburger-button .hamburger-line {
+    width: 30px;
+    height: 3px;
+    background: #333;
+    margin: 6px 0px;
+}
+
+.hamburger-button#menu-hamburger-button {
+    position: relative;
+    left: 165px;
+    top: 35px;
+}
+
+/* Mobile menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* right: 0; */
+    width: 250px;
+    height: 100%;
+    z-index: 100;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    transition: right 0.3s ease-in-out;
+}
+
+.mobile-menu .dividing-line {
+    position: relative;
+    width: 90%;
+    height: 5px;
+    left: 5%;
+    background-color: #333;
+    border-radius: 3px;
+    /* margin-bottom: 20px; */
+    margin-top: 60px;
+}
+
+.mobile-menu .menu-bar {
+    /* position: relative; */
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: left;
+}
+
+.mobile-menu #play-btn {
+    margin-left: 0px;
+    margin: 10px;
+}
+
+.mobile-menu.open {
+    right: 0px;
+}
+
+/* Media queries */
+@Media (max-width: 1000px) {
+    .promo-area .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .promo-image-container {
+        padding-top: 50px;
+        max-width: 75%;
+    }
+}
+
+@Media (min-width: 790px) {
+    .navbar .main-menu {
+        display: block;
+    }
+
+    .navbar .hamburger-button {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+}
+
+@Media (max-width: 790px) {
+    .navbar .main-menu {
+        display: none;
+    }
+
+    .navbar .hamburger-button {
+        display: block;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .story-area .container {
+        padding: 40px 40px;
+    }
+}
+
+@Media (max-width: 660px) {
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 50px;
+    }
+
+    .promo-image-container {
+        padding-top: 50px;
+        max-width: 90%;
+    }
+}
+
+@Media (max-width: 540px) {
+    .promo-button-container {
+        flex-direction: column;
+    }
+    
+    .promo-button-container a {
+        margin: 20px 0px 20px 0px;
+        min-width: 200px;
+    }
+
+    .promo-image-container {
+        padding-top: 0px;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+
+@Media (max-width: 390px) {
+    .header-title {
+        font-size: 16pt;
+    }
 }
