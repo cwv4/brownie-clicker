@@ -1,0 +1,165 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #eee;
+}
+
+h2, h3 {
+    font-size: 32pt;
+}
+
+h2 {
+    border: 5px solid black;
+    border-radius: 12px;
+    margin: 20px 20px 0px;
+    padding: 8px 0px;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    height: 100vh;
+}
+
+.purchases-section, .store-section {
+    background-color: #666;
+}
+
+.brownie-section {
+    background-color: #444;
+}
+
+.brownie-section .header-container {
+    border: 5px solid black;
+    border-radius: 12px;
+    margin: 20px 20px 0px;
+    padding: 8px 0px;
+}
+
+.brownie-header {
+    padding-bottom: 20px;
+}
+
+.brownie-container {
+    background: url("../images/oven.png") no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    height: 60%;
+}
+
+.brownie-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 750px;
+}
+
+:root {
+    --brownie-max-width: 75%;
+}
+
+.click-brownie {
+    height: auto;
+    max-width: var(--brownie-max-width);
+    object-fit: contain;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    transition: 0.15s;
+}
+
+@Media (pointer: fine) {
+    .click-brownie:hover {
+        max-width: calc(var(--brownie-max-width) + 2%);
+    }
+
+    .click-brownie:active {
+        max-width: calc(var(--brownie-max-width) - 1%);
+    }
+}
+
+@Media (pointer: coarse) or (pointer: none) {
+    .click-brownie:active {
+        max-width: calc(var(--brownie-max-width) + 2%);
+    }
+}
+
+@Media (max-width: 1500px) {
+    .brownie-image-container {
+        width: 100%;
+    }
+
+    :root {
+        --brownie-max-width: 80%;
+    }
+}
+
+@Media (max-width: 1200px) {
+    :root {
+        --brownie-max-width: 85%;
+    }
+}
+
+@Media (max-width: 800px) {
+    .game-container {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    .purchases-section, .store-section {
+        padding-bottom: 20px;
+    }
+
+    :root {
+        --brownie-max-width: 70%;
+    }
+}
+
+@Media (max-width: 500px) {
+    :root {
+        --brownie-max-width: 80%;
+    }
+}
+
+.items-upgrades-container {
+    display: grid;
+    grid-template-rows: 1fr 10fr 1fr 10fr;
+    align-items: center;
+    /* height: 100%; */
+    margin-top: 20px;
+}
+
+.line {
+    height: 4px;
+    width: 30%;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.items-header, .upgrades-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /* background-color: chartreuse; */
+}
+
+h4 {
+    font-size: 18pt;
+}

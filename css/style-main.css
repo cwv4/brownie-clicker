@@ -33,7 +33,7 @@ img {
 
 /* Navbar */
 .navbar {
-    background: url("/images/brownie-header.jpg");
+    background: url("../images/brownie-header.jpg");
     padding: 20px;
 }
 
