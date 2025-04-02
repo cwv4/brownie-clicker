@@ -12,7 +12,7 @@
 
 <body>
     <div class="game-container">
-        <section class="purchases-section">
+        <section class="purchases-section active" id="first-purchases-section">
             <div class="header-container">
                 <h2>Purchases</h2>
             </div>
@@ -23,7 +23,9 @@
                     <div class="line"></div>
                 </div>
                 <div class="items-container">
-
+                    <div class="upgrade-container auto-clicker empty">
+                        <p>Auto Clicker - <span class="auto-clicker-amount">0</span></p>
+                    </div>
                 </div>
                 <div class="upgrades-header">
                     <div class="line"></div>
@@ -31,7 +33,9 @@
                     <div class="line"></div>
                 </div>
                 <div class="upgrades-container">
-                    
+                    <div class="upgrade-container cursor-boost empty">
+                        <p>Cursor Boost - <span class="cursor-boost-amount">1</span></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -40,10 +44,35 @@
             <div class="header-container">
                 <h3 class="brownie-header">Brownie Points&trade;</h3>
                 <h3 id="points-holder">0</h3>
+                <h4 id="bpps-holder">BP&trade; / sec: <span class="bpps-value">0.0</span></h4>
             </div>
             <div class="brownie-container">
                 <div class="brownie-image-container">
                     <img draggable="false" class="click-brownie" id="click-brownie" src="images/click-brownie.png">
+                </div>
+            </div>
+        </section>
+
+        <section class="purchases-section inactive" id="second-purchases-section">
+            <div class="header-container">
+                <h2>Purchases</h2>
+            </div>
+            <div class="purchases-container items-upgrades-container">
+                <div class="items-header">
+                    <div class="line"></div>
+                    <h4>Items</h4>
+                    <div class="line"></div>
+                </div>
+                <div class="items-container">
+                    
+                </div>
+                <div class="upgrades-header">
+                    <div class="line"></div>
+                    <h4>Upgrades</h4>
+                    <div class="line"></div>
+                </div>
+                <div class="upgrades-container">
+                    
                 </div>
             </div>
         </section>
@@ -59,8 +88,8 @@
                     <div class="line"></div>
                 </div>
                 <div class="items-container">
-                    <div class="item-container">
-                        
+                    <div class="item-container auto-clicker">
+                        <p>Auto Clicker - plus 0.1 BP&trade; / sec - <span class="auto-clicker-cost">100</span></p>
                     </div>
                 </div>
                 <div class="upgrades-header">
@@ -69,7 +98,9 @@
                     <div class="line"></div>
                 </div>
                 <div class="upgrades-container">
-                    
+                    <div class="upgrade-container cursor-boost">
+                        <p>Cursor Boost - plus 1 to each click - <span class="cursor-boost-cost">10</span> BP&trade;</p>
+                    </div>
                 </div>
             </div>
         </section>

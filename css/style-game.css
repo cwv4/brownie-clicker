@@ -31,8 +31,16 @@ h2 {
     background-color: #666;
 }
 
+.inactive {
+    display: none;
+}
+
 .brownie-section {
     background-color: #444;
+}
+
+#bpps-holder {
+    padding-top: 8px;
 }
 
 .brownie-section .header-container {
@@ -90,13 +98,23 @@ h2 {
     }
 
     .click-brownie:active {
-        max-width: calc(var(--brownie-max-width) - 1%);
+        animation: brownie-click-movement 0.2s ease forwards;
+    }
+}
+
+@keyframes brownie-click-movement {
+    50% {
+        max-width: calc(var(--brownie-max-width) - 3%);
+    }
+
+    100% {
+        max-width: calc(var(--brownie-max-width));
     }
 }
 
 @Media (pointer: coarse) or (pointer: none) {
-    .click-brownie:active {
-        max-width: calc(var(--brownie-max-width) + 2%);
+    .click-brownie.mobile-click {
+        animation: brownie-click-movement 0.10s ease forwards;
     }
 }
 
@@ -118,9 +136,10 @@ h2 {
 
 @Media (max-width: 800px) {
     .game-container {
-        display: grid;
-        grid-template-columns: none;
-        grid-template-rows: 1fr 1fr 1fr;
+        display: flex;
+        flex-direction: column;
+        /* grid-template-columns: none;
+        grid-template-rows: 1fr 1fr 1fr; */
     }
 
     .purchases-section, .store-section {
@@ -129,6 +148,10 @@ h2 {
 
     :root {
         --brownie-max-width: 70%;
+    }
+
+    .brownie-container {
+        height: 400px;
     }
 }
 
@@ -162,4 +185,14 @@ h2 {
 
 h4 {
     font-size: 18pt;
+}
+
+.store-section .upgrade-container,
+.store-section .item-container {
+    cursor: pointer;
+    user-select: none;
+}
+
+.empty {
+    color: #333;
 }
