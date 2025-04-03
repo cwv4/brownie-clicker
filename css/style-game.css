@@ -163,10 +163,14 @@ h2 {
 
 .items-upgrades-container {
     display: grid;
-    grid-template-rows: 1fr 10fr 1fr 10fr;
+    grid-template-rows: 1fr 8fr 1fr 14fr;
     align-items: center;
     /* height: 100%; */
     margin-top: 20px;
+}
+
+.upgrade-container {
+    padding-bottom: 15px;
 }
 
 .line {
@@ -185,6 +189,19 @@ h2 {
 
 h4 {
     font-size: 18pt;
+}
+
+.upgrades-container, .items-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 15px;
+    /* background-color: aqua; */
+    height: 100%;
+}
+
+.items-container {
+    padding-bottom: 10px;
 }
 
 .store-section .upgrade-container,
