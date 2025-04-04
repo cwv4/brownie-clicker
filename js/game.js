@@ -43,6 +43,7 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
 
     /* Total points */
     let browniePoints = 0;
+    let won = false;
 
     
 
@@ -50,7 +51,9 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
         browniePoints += points;
         renderObjects();
 
-        if (browniePoints >= 1000000000000000) {
+        if (browniePoints >= 1000000000000000 && won == false) {
+            won = true;
+            document.querySelector("span.stopwatch").innerHTML = timerDisplay(seconds);
             document.querySelector(".win-container").classList.remove("no-win");
         }
 
@@ -120,6 +123,33 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
 
     setInterval(browniePointsPerSecondCalc, 50);
 
+
+
+    /* Timer display */
+    let seconds = 0;
+
+    setInterval(() => seconds++, 1000);
+
+    function timerDisplay(seconds) {
+        let hours, minutes, displaySeconds = 0;
+        let display = "";
+
+        if (seconds >= 3600) {
+            hours = Math.floor(seconds / 3600);
+            display = String(hours) + "h ";
+        }
+
+        if (seconds >= 60) {
+            minutes = Math.floor((seconds % 3600) / 60);
+            display += String(minutes).padStart(2, "0") + "m ";
+        }
+
+        displaySeconds = seconds % 60;
+
+        display += String(displaySeconds).padStart(2, "0") + "s";
+        console.log(display);
+        return display;
+    }
 
 
 
