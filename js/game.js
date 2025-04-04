@@ -49,6 +49,11 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
     function addPoints(points) {
         browniePoints += points;
         renderObjects();
+
+        if (browniePoints >= 1000000000000000) {
+            document.querySelector(".win-container").classList.remove("no-win");
+        }
+
         return browniePoints;
     }
 
@@ -150,14 +155,14 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
         "cursor-boost": {
             "amount": 0,
             "cost": 10,
-            "costFactor": 1.21,
+            "costFactor": 1.45,
             "total": 1,
-            "rate": 1.2
+            "rate": 1.4
         },
         "mega-clicker": {
             "amount": 0,
             "cost": 1000,
-            "costFactor": 2.001,
+            "costFactor": 2.1,
             "total": 1,
             "rate": 2
         },
@@ -166,7 +171,7 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
             "cost": 10000,
             "costFactor": 1.35,
             "total": 1,
-            "rate": 1.5
+            "rate": 1.4
         },
         "caffeine-kick": {
             "amount": 0,
@@ -187,7 +192,7 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
             "cost": 100000000,
             "costFactor": 3.0,
             "total": 0.0,
-            "rate": 0.01
+            "rate": 0.005
         }
     };
 
@@ -210,6 +215,10 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
 
         if (attemptPurchase(storeObject.cost) != null) {
             storeObject.amount++;
+
+            if (storeObject.cost >= 1000000 && storeObject.cost <= 1000000000 && key != "cursor-boost") {
+                storeObject.costFactor += 0.5;
+            }
 
             storeObject.cost = Math.floor(storeObject.cost * storeObject.costFactor);
 
@@ -438,6 +447,11 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
         setInterval(exceleratorInterval, 1000);
     }
     EXCELERATOR.addEventListener("click", () => clickStoreItem("excelerator", exceleratorPurchase));
+
+
+
+
+
 
 
 
