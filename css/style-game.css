@@ -21,7 +21,7 @@ h2 {
     padding: 8px 0px;
 }
 
-.game-container {
+.desktop-game-container {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     height: 100vh;
@@ -31,7 +31,7 @@ h2 {
     background-color: #666;
 }
 
-.inactive {
+body div.inactive {
     display: none;
 }
 
@@ -92,75 +92,6 @@ h2 {
     transition: 0.15s;
 }
 
-@Media (pointer: fine) {
-    .click-brownie:hover {
-        max-width: calc(var(--brownie-max-width) + 2%);
-    }
-
-    .click-brownie:active {
-        animation: brownie-click-movement 0.2s ease forwards;
-    }
-}
-
-@keyframes brownie-click-movement {
-    50% {
-        max-width: calc(var(--brownie-max-width) - 3%);
-    }
-
-    100% {
-        max-width: calc(var(--brownie-max-width));
-    }
-}
-
-@Media (pointer: coarse) or (pointer: none) {
-    .click-brownie.mobile-click {
-        animation: brownie-click-movement 0.10s ease forwards;
-    }
-}
-
-@Media (max-width: 1500px) {
-    .brownie-image-container {
-        width: 100%;
-    }
-
-    :root {
-        --brownie-max-width: 80%;
-    }
-}
-
-@Media (max-width: 1200px) {
-    :root {
-        --brownie-max-width: 85%;
-    }
-}
-
-@Media (max-width: 800px) {
-    .game-container {
-        display: flex;
-        flex-direction: column;
-        /* grid-template-columns: none;
-        grid-template-rows: 1fr 1fr 1fr; */
-    }
-
-    .purchases-section, .store-section {
-        padding-bottom: 20px;
-    }
-
-    :root {
-        --brownie-max-width: 70%;
-    }
-
-    .brownie-container {
-        height: 400px;
-    }
-}
-
-@Media (max-width: 500px) {
-    :root {
-        --brownie-max-width: 80%;
-    }
-}
-
 .items-upgrades-container {
     display: grid;
     grid-template-rows: 1fr 8fr 1fr 14fr;
@@ -180,11 +111,10 @@ h2 {
     border-radius: 5px;
 }
 
-.items-header, .upgrades-header {
+.items-header, .upgrades-header, .mobile-store-header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    /* background-color: chartreuse; */
 }
 
 h4 {
@@ -196,7 +126,6 @@ h4 {
     flex-direction: column;
     justify-content: space-between;
     padding-top: 15px;
-    /* background-color: aqua; */
     height: 100%;
 }
 
@@ -258,5 +187,94 @@ h4 {
 
     100% {
         color: #23d32cff;
+    }
+}
+
+
+
+@Media (pointer: fine) {
+    .click-brownie:hover {
+        max-width: calc(var(--brownie-max-width) + 2%);
+    }
+
+    .click-brownie:active {
+        animation: brownie-click-movement 0.2s ease forwards;
+    }
+}
+
+@keyframes brownie-click-movement {
+    50% {
+        max-width: calc(var(--brownie-max-width) - 3%);
+    }
+
+    100% {
+        max-width: calc(var(--brownie-max-width));
+    }
+}
+
+@Media (pointer: coarse) or (pointer: none) {
+    .click-brownie.mobile-click {
+        animation: brownie-click-movement 0.10s ease forwards;
+    }
+}
+
+@Media (max-width: 1500px) {
+    .brownie-image-container {
+        width: 100%;
+    }
+
+    :root {
+        --brownie-max-width: 80%;
+    }
+}
+
+@Media (max-width: 1200px) {
+    :root {
+        --brownie-max-width: 85%;
+    }
+}
+
+@Media (max-width: 800px) {
+    body {
+        padding-top: 15px;
+        background-color: #666;
+    }
+
+    h3 {
+        font-size: 19pt;
+        padding-bottom: 5px;
+    }
+
+    .purchases-section, .store-section {
+        padding-bottom: 20px;
+    }
+
+    :root {
+        --brownie-max-width: 70%;
+    }
+
+    .brownie-container {
+        height: 300px;
+        margin-top: 40px;
+    }
+
+    .mobile-store-header {
+        padding-bottom: 10px;
+    }
+
+    .mobile-upgrade-container, .mobile-item-container {
+        padding-bottom: 10px;
+    }
+}
+
+@Media (max-width: 600px) {
+    .brownie-container {
+        margin-top: 0px;
+    }
+}
+
+@Media (max-width: 500px) {
+    :root {
+        --brownie-max-width: 80%;
     }
 }

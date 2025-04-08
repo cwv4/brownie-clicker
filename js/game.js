@@ -1,18 +1,39 @@
 /* Window Resize */
-const FIRST_PURCHASES_SECTION = document.querySelector("#first-purchases-section");
-const SECOND_PURCHASES_SECTION = document.querySelector("#second-purchases-section");
+const DESKTOP_GAME_CONTAINER = document.querySelector(".desktop-game-container");
+const MOBILE_GAME_CONTAINER = document.querySelector(".mobile-game-container");
+let BROWNIE = document.querySelector(".active .click-brownie");
+
+let clickEvent = "click";
 
 function windowResize() {
 	if (window.innerWidth < 800) {
-		FIRST_PURCHASES_SECTION.classList.add("inactive");
-		FIRST_PURCHASES_SECTION.classList.remove("active");
-		SECOND_PURCHASES_SECTION.classList.add("active");
-		SECOND_PURCHASES_SECTION.classList.remove("inactive");
+		DESKTOP_GAME_CONTAINER.classList.add("inactive");
+		DESKTOP_GAME_CONTAINER.classList.remove("active");
+		MOBILE_GAME_CONTAINER.classList.add("active");
+		MOBILE_GAME_CONTAINER.classList.remove("inactive");
+
+        BROWNIE = document.querySelector(".active .click-brownie");
+
+        BROWNIE.removeEventListener("click", clickBrownie);
+        BROWNIE.addEventListener("touchstart", clickBrownie);
+        BROWNIE.addEventListener("touchstart", mobileAnimationStart);
+        BROWNIE.addEventListener("touchend", mobileAnimationEnd);
+
+        clickEvent = "touchstart";
 	} else {
-		FIRST_PURCHASES_SECTION.classList.add("active");
-		FIRST_PURCHASES_SECTION.classList.remove("inactive");
-		SECOND_PURCHASES_SECTION.classList.add("inactive");
-		SECOND_PURCHASES_SECTION.classList.remove("active");
+		DESKTOP_GAME_CONTAINER.classList.add("active");
+		DESKTOP_GAME_CONTAINER.classList.remove("inactive");
+		MOBILE_GAME_CONTAINER.classList.add("inactive");
+		MOBILE_GAME_CONTAINER.classList.remove("active");
+
+        BROWNIE = document.querySelector(".active .click-brownie");
+
+        BROWNIE.addEventListener("click", clickBrownie);
+        BROWNIE.removeEventListener("touchstart", clickBrownie);
+        BROWNIE.removeEventListener("touchstart", mobileAnimationStart);
+        BROWNIE.removeEventListener("touchend", mobileAnimationEnd);
+
+        clickEvent = "click";
 	}
 }
 
@@ -23,17 +44,15 @@ windowResize();
 
 
 /* Mobile animation */
-const BROWNIE = document.querySelector("#click-brownie");
 
-function moveBrownieOnClick() {
-    BROWNIE.classList.remove("mobile-click");
-    
+
+function mobileAnimationStart() {
     BROWNIE.classList.add("mobile-click");
-    console.log("Here");
 }
 
-BROWNIE.addEventListener("click", () => BROWNIE.classList.add("mobile-click"));
-BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-click"));
+function mobileAnimationEnd() {
+    BROWNIE.classList.remove("mobile-click");
+}
 
 
 
@@ -83,7 +102,7 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
         addPoints(clickMultiplier);
     }
 
-    BROWNIE.addEventListener("click", clickBrownie);
+    
 
 
 
@@ -263,8 +282,8 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
     }
 
 
-    const POINTS_DISPLAY = document.querySelector("#points-holder");
-    const POINTS_PER_SECOND_DISPLAY = document.querySelector("#bpps-value");
+    const POINTS_DISPLAY = document.querySelector(".active .points-holder");
+    const POINTS_PER_SECOND_DISPLAY = document.querySelector(".active .bpps-value");
 
 
     function renderObjects() {
@@ -272,14 +291,14 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
 
         itemsKeys.forEach((key) => {
             let item = storeItems[key];
-            let purchasesSelector = ".purchases-section.active .item-container." + key + " span." + key;
+            let purchasesSelector = ".active ." + key + " span." + key;
             document.querySelector(purchasesSelector + "-amount").innerHTML = item.amount;
             document.querySelector(purchasesSelector + "-bpps").innerHTML = perSecondDisplay(item.bpps);
             if (item.amount > 0) {
                 document.querySelector(purchasesSelector + "-amount").parentNode.parentNode.classList.remove("empty");
             }
 
-            let storeSelector = ".store-section .item-container." + key + " span." + key;
+            let storeSelector = ".active ." + key + " span." + key;
             document.querySelector(storeSelector + "-cost").innerHTML = pointsDisplay(item.cost);
             document.querySelector(storeSelector + "-each").innerHTML = perSecondDisplay(item.baseMultiplier * item.upgradeMultiplier);
             if (browniePoints < item.cost) {
@@ -293,14 +312,14 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
 
         upgradeKeys.forEach((key) => {
             let upgrade = storeUpgrades[key];
-            let purchasesSelector = ".purchases-section.active .upgrade-container." + key + " span." + key;
+            let purchasesSelector = ".active ." + key + " span." + key;
             document.querySelector(purchasesSelector + "-amount").innerHTML = upgrade.amount;
             document.querySelector(purchasesSelector + "-total").innerHTML = perSecondDisplay(upgrade.total);
             if (upgrade.amount > 0) {
                 document.querySelector(purchasesSelector + "-amount").parentNode.parentNode.classList.remove("empty");
             }
 
-            let storeSelector = ".store-section .upgrade-container." + key + " span." + key;
+            let storeSelector = ".active ." + key + " span." + key;
             document.querySelector(storeSelector + "-cost").innerHTML = pointsDisplay(upgrade.cost);
             document.querySelector(storeSelector + "-rate").innerHTML = perSecondDisplay(upgrade.rate);
             if (browniePoints < upgrade.cost) {
@@ -382,27 +401,27 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
 
 
     /* Items */
-    const AUTO_CLICKER = document.querySelector(".store-section .item-container.auto-clicker");
+    const AUTO_CLICKER = document.querySelector(".active .auto-clicker");
     function autoClickerPurchase() {
 
     }
-    AUTO_CLICKER.addEventListener("click", () => clickStoreItem("auto-clicker", autoClickerPurchase));
+    AUTO_CLICKER.addEventListener(clickEvent, () => clickStoreItem("auto-clicker", autoClickerPurchase));
 
 
 
-    const OVEN_TRONIC = document.querySelector(".store-section .item-container.oven-tronic");
+    const OVEN_TRONIC = document.querySelector(".active .oven-tronic");
     function ovenTronicPurchase() {
 
     }
-    OVEN_TRONIC.addEventListener("click", () => clickStoreItem("oven-tronic", ovenTronicPurchase));
+    OVEN_TRONIC.addEventListener(clickEvent, () => clickStoreItem("oven-tronic", ovenTronicPurchase));
 
 
 
-    const BROWNIE_ELF = document.querySelector(".store-section .item-container.brownie-elf");
+    const BROWNIE_ELF = document.querySelector(".active .brownie-elf");
     function brownieElfPurchase() {
 
     }
-    BROWNIE_ELF.addEventListener("click", () => clickStoreItem("brownie-elf", brownieElfPurchase));
+    BROWNIE_ELF.addEventListener(clickEvent, () => clickStoreItem("brownie-elf", brownieElfPurchase));
 
 
 
@@ -415,45 +434,45 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
 
     /* Upgrades */
 
-    const CURSOR_BOOST = document.querySelector(".store-section .upgrade-container.cursor-boost");
+    const CURSOR_BOOST = document.querySelector(".active .cursor-boost");
     function cursorBoostPurchase() {
         let upgrade = storeUpgrades["cursor-boost"];
         upgrade.total *= upgrade.rate;
     }
-    CURSOR_BOOST.addEventListener("click", () => clickStoreItem("cursor-boost", cursorBoostPurchase));
+    CURSOR_BOOST.addEventListener(clickEvent, () => clickStoreItem("cursor-boost", cursorBoostPurchase));
 
 
 
-    const MEGA_CLICKER = document.querySelector(".store-section .upgrade-container.mega-clicker");
+    const MEGA_CLICKER = document.querySelector(".active .mega-clicker");
     function megaClickerPurchase() {
         let upgrade = storeUpgrades["mega-clicker"];
         upgrade.total *= upgrade.rate;
         storeItems["auto-clicker"].upgradeMultiplier *= upgrade.rate;
     }
-    MEGA_CLICKER.addEventListener("click", () => clickStoreItem("mega-clicker", megaClickerPurchase));
+    MEGA_CLICKER.addEventListener(clickEvent, () => clickStoreItem("mega-clicker", megaClickerPurchase));
 
 
 
-    const DOUBLE_DOOR = document.querySelector(".store-section .upgrade-container.double-door");
+    const DOUBLE_DOOR = document.querySelector(".active .double-door");
     function doubleDoorPurchase() {
         let upgrade = storeUpgrades["double-door"];
         upgrade.total *= upgrade.rate;
         storeItems["oven-tronic"].upgradeMultiplier *= upgrade.rate;
     }
-    DOUBLE_DOOR.addEventListener("click", () => clickStoreItem("double-door", doubleDoorPurchase));
+    DOUBLE_DOOR.addEventListener(clickEvent, () => clickStoreItem("double-door", doubleDoorPurchase));
 
 
 
-    const CAFFEINE_KICK = document.querySelector(".store-section .upgrade-container.caffeine-kick");
+    const CAFFEINE_KICK = document.querySelector(".active .caffeine-kick");
     function caffeineKickPurchase() {
         let upgrade = storeUpgrades["caffeine-kick"];
         upgrade.total *= upgrade.rate;
         storeItems["brownie-elf"].upgradeMultiplier *= upgrade.rate;
     }
-    CAFFEINE_KICK.addEventListener("click", () => clickStoreItem("caffeine-kick", caffeineKickPurchase));
+    CAFFEINE_KICK.addEventListener(clickEvent, () => clickStoreItem("caffeine-kick", caffeineKickPurchase));
 
 
-    const MORE_CHOCOLATE = document.querySelector(".store-section .upgrade-container.more-chocolate");
+    const MORE_CHOCOLATE = document.querySelector(".active .more-chocolate");
     function moreChocolatePurchase() {
         let upgrade = storeUpgrades["more-chocolate"];
         upgrade.total *= upgrade.rate;
@@ -463,11 +482,11 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
         });
 
     }
-    MORE_CHOCOLATE.addEventListener("click", () => clickStoreItem("more-chocolate", moreChocolatePurchase));
+    MORE_CHOCOLATE.addEventListener(clickEvent, () => clickStoreItem("more-chocolate", moreChocolatePurchase));
 
 
 
-    const EXCELERATOR = document.querySelector(".store-section .upgrade-container.excelerator");
+    const EXCELERATOR = document.querySelector(".active .excelerator");
     function exceleratorInterval() {
         let upgrade = storeUpgrades["excelerator"];
         upgrade.total += (pointsPerSecond - storeUpgrades["excelerator"].total) * 0.005;
@@ -476,7 +495,7 @@ BROWNIE.addEventListener("animationend", () => BROWNIE.classList.remove("mobile-
     function exceleratorPurchase() {
         setInterval(exceleratorInterval, 1000);
     }
-    EXCELERATOR.addEventListener("click", () => clickStoreItem("excelerator", exceleratorPurchase));
+    EXCELERATOR.addEventListener(clickEvent, () => clickStoreItem("excelerator", exceleratorPurchase));
 
 
 
