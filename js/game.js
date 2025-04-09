@@ -4,6 +4,8 @@ const MOBILE_GAME_CONTAINER = document.querySelector(".mobile-game-container");
 let BROWNIE = document.querySelector(".active .click-brownie");
 
 let clickEvent = "click";
+let purchasesSection = ".purchases-section";
+let storeSection = ".store-section";
 
 function windowResize() {
 	if (window.innerWidth < 800) {
@@ -20,6 +22,8 @@ function windowResize() {
         BROWNIE.addEventListener("touchend", mobileAnimationEnd);
 
         clickEvent = "touchstart";
+        purchasesSection = "";
+        storeSection = "";
 	} else {
 		DESKTOP_GAME_CONTAINER.classList.add("active");
 		DESKTOP_GAME_CONTAINER.classList.remove("inactive");
@@ -34,6 +38,8 @@ function windowResize() {
         BROWNIE.removeEventListener("touchend", mobileAnimationEnd);
 
         clickEvent = "click";
+        purchasesSection = ".purchases-section";
+        storeSection = ".store-section";
 	}
 }
 
@@ -291,14 +297,14 @@ function mobileAnimationEnd() {
 
         itemsKeys.forEach((key) => {
             let item = storeItems[key];
-            let purchasesSelector = ".active ." + key + " span." + key;
+            let purchasesSelector = ".active " + purchasesSection + " ." + key + " span." + key;
             document.querySelector(purchasesSelector + "-amount").innerHTML = item.amount;
             document.querySelector(purchasesSelector + "-bpps").innerHTML = perSecondDisplay(item.bpps);
             if (item.amount > 0) {
                 document.querySelector(purchasesSelector + "-amount").parentNode.parentNode.classList.remove("empty");
             }
 
-            let storeSelector = ".active ." + key + " span." + key;
+            let storeSelector = ".active " + storeSection + " ." + key + " span." + key;
             document.querySelector(storeSelector + "-cost").innerHTML = pointsDisplay(item.cost);
             document.querySelector(storeSelector + "-each").innerHTML = perSecondDisplay(item.baseMultiplier * item.upgradeMultiplier);
             if (browniePoints < item.cost) {
@@ -312,14 +318,14 @@ function mobileAnimationEnd() {
 
         upgradeKeys.forEach((key) => {
             let upgrade = storeUpgrades[key];
-            let purchasesSelector = ".active ." + key + " span." + key;
+            let purchasesSelector = ".active " + purchasesSection + " ." + key + " span." + key;
             document.querySelector(purchasesSelector + "-amount").innerHTML = upgrade.amount;
             document.querySelector(purchasesSelector + "-total").innerHTML = perSecondDisplay(upgrade.total);
             if (upgrade.amount > 0) {
                 document.querySelector(purchasesSelector + "-amount").parentNode.parentNode.classList.remove("empty");
             }
 
-            let storeSelector = ".active ." + key + " span." + key;
+            let storeSelector = ".active " + storeSection + " ." + key + " span." + key;
             document.querySelector(storeSelector + "-cost").innerHTML = pointsDisplay(upgrade.cost);
             document.querySelector(storeSelector + "-rate").innerHTML = perSecondDisplay(upgrade.rate);
             if (browniePoints < upgrade.cost) {
@@ -401,7 +407,7 @@ function mobileAnimationEnd() {
 
 
     /* Items */
-    const AUTO_CLICKER = document.querySelector(".active .auto-clicker");
+    const AUTO_CLICKER = document.querySelector(".active " + storeSection + " .auto-clicker");
     function autoClickerPurchase() {
 
     }
@@ -409,7 +415,7 @@ function mobileAnimationEnd() {
 
 
 
-    const OVEN_TRONIC = document.querySelector(".active .oven-tronic");
+    const OVEN_TRONIC = document.querySelector(".active " + storeSection + " .oven-tronic");
     function ovenTronicPurchase() {
 
     }
@@ -417,7 +423,7 @@ function mobileAnimationEnd() {
 
 
 
-    const BROWNIE_ELF = document.querySelector(".active .brownie-elf");
+    const BROWNIE_ELF = document.querySelector(".active " + storeSection + " .brownie-elf");
     function brownieElfPurchase() {
 
     }
@@ -434,7 +440,7 @@ function mobileAnimationEnd() {
 
     /* Upgrades */
 
-    const CURSOR_BOOST = document.querySelector(".active .cursor-boost");
+    const CURSOR_BOOST = document.querySelector(".active " + storeSection + " .cursor-boost");
     function cursorBoostPurchase() {
         let upgrade = storeUpgrades["cursor-boost"];
         upgrade.total *= upgrade.rate;
@@ -443,7 +449,7 @@ function mobileAnimationEnd() {
 
 
 
-    const MEGA_CLICKER = document.querySelector(".active .mega-clicker");
+    const MEGA_CLICKER = document.querySelector(".active " + storeSection + " .mega-clicker");
     function megaClickerPurchase() {
         let upgrade = storeUpgrades["mega-clicker"];
         upgrade.total *= upgrade.rate;
@@ -453,7 +459,7 @@ function mobileAnimationEnd() {
 
 
 
-    const DOUBLE_DOOR = document.querySelector(".active .double-door");
+    const DOUBLE_DOOR = document.querySelector(".active " + storeSection + " .double-door");
     function doubleDoorPurchase() {
         let upgrade = storeUpgrades["double-door"];
         upgrade.total *= upgrade.rate;
@@ -463,7 +469,7 @@ function mobileAnimationEnd() {
 
 
 
-    const CAFFEINE_KICK = document.querySelector(".active .caffeine-kick");
+    const CAFFEINE_KICK = document.querySelector(".active " + storeSection + " .caffeine-kick");
     function caffeineKickPurchase() {
         let upgrade = storeUpgrades["caffeine-kick"];
         upgrade.total *= upgrade.rate;
@@ -472,7 +478,7 @@ function mobileAnimationEnd() {
     CAFFEINE_KICK.addEventListener(clickEvent, () => clickStoreItem("caffeine-kick", caffeineKickPurchase));
 
 
-    const MORE_CHOCOLATE = document.querySelector(".active .more-chocolate");
+    const MORE_CHOCOLATE = document.querySelector(".active " + storeSection + " .more-chocolate");
     function moreChocolatePurchase() {
         let upgrade = storeUpgrades["more-chocolate"];
         upgrade.total *= upgrade.rate;
@@ -486,7 +492,7 @@ function mobileAnimationEnd() {
 
 
 
-    const EXCELERATOR = document.querySelector(".active .excelerator");
+    const EXCELERATOR = document.querySelector(".active " + storeSection + " .excelerator");
     function exceleratorInterval() {
         let upgrade = storeUpgrades["excelerator"];
         upgrade.total += (pointsPerSecond - storeUpgrades["excelerator"].total) * 0.005;
