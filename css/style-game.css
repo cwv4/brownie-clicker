@@ -55,7 +55,7 @@ body div.inactive {
 }
 
 .brownie-container {
-    background: url("../images/oven.png") no-repeat;
+    background: url('images/oven.png') no-repeat;
     background-position: center;
     background-size: contain;
     display: flex;
